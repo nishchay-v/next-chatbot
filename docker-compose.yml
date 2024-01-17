@@ -1,9 +1,9 @@
 version: "3.9"
 services:
-  next-chathot:
+  next-chatbot:
     image: postgres
     restart: always
-    container_name: next-chathot
+    container_name: next-chatbot
     ports:
       - 5439:5432
     environment:

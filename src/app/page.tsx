@@ -1,10 +1,12 @@
+// Entry point for the application
 import { db } from "@/db";
 import { questions } from "@/db/schema";
 import { revalidatePath } from "next/cache";
 
+
+// This is a react server component, it has access to DB
 export default async function Home() {
   const allQuestions = await db.query.questions.findMany();
-
   return (
     <main className="">
       {allQuestions.map((question) => (
