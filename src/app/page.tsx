@@ -14,13 +14,14 @@ export default async function Home() {
       ))}
 
       <form
+        // this is a server action
         action={async (formData: FormData) => {
           "use server";
           const title = formData.get("title") as string;
           await db.insert(questions).values({
             prompt: title,
           });
-          // revalidatePath("/");
+          revalidatePath("/");
         }}
       >
         <label htmlFor="title">Title</label>
