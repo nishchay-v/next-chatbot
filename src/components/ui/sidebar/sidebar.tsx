@@ -1,11 +1,13 @@
 "use client";
 
+import { Pixelify_Sans } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { SidebarNavItem } from "types";
 import { cn } from "@/lib/utils";
 
+const pixelifySans = Pixelify_Sans({ subsets: ["latin"], display: "swap" });
 export interface DocsSidebarNavProps {
   items: SidebarNavItem[];
 }
@@ -39,14 +41,14 @@ export function DocsSidebarNavItems({
   pathname,
 }: DocsSidebarNavItemsProps) {
   return items?.length ? (
-    <div className="grid grid-flow-row auto-rows-max text-sm">
+    <div className="grid grid-flow-row auto-rows-max px-4 space-y-4 text-l">
       {items.map((item, index) =>
         !item.disabled && item.href ? (
           <Link
             key={index}
             href={item.href}
             className={cn(
-              "flex w-full items-center rounded-md p-2 hover:underline",
+              "flex w-full items-center rounded-full p-2 hover:border hover:border-gray-400 hover:shadow",
               {
                 "bg-muted": pathname === item.href,
               }

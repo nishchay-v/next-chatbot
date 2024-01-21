@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { Pixelify_Sans } from "next/font/google";
 import {
   Menubar,
   MenubarContent,
@@ -24,8 +25,11 @@ import { DocsSidebarNav } from "@/components/ui/sidebar/sidebar";
 
 const SIDEBAR_ITEMS = [
   {
-    title: "Chat",
     items: [
+      {
+        title: "+ New Chat",
+        href: "/chats/new",
+      },
       {
         title: "Chat 1",
         href: "/chats/1",
@@ -42,18 +46,18 @@ const SIDEBAR_ITEMS = [
   },
 ];
 
+const pixelifySans = Pixelify_Sans({ subsets: ["latin"], display: "swap" });
+
 // menu with a drawer trigger, app title and a profile menu
-export default async function AppMenu({
+export default function ChatLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // const [sidebarOpen, setSidebarOpen] = useState(true);
-
   return (
-    <div>
-      <Menubar className="justify-between fixed top-0 w-full h-12">
-        <div>Chats</div>
+    <div className="flex flex-col h-screen">
+      <Menubar className="justify-between fixed top-0 w-full h-12 z-50 bg-white border-none shadow-none">
+        <h1 className={`${pixelifySans.className} mx-2 text-4xl`}>ChatBot</h1>
         <MenubarMenu>
           <MenubarTrigger>Profile</MenubarTrigger>
           <MenubarContent>
@@ -63,14 +67,14 @@ export default async function AppMenu({
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
-      {/* <div className="w-full h-full"> */}
-      <div className="flex flex-row h-full m-12">
-        <div className="w-1/5 overscroll-contain bg-white container">
+      <div className="flex flex-row pt-12 w-full h-full overflow-hidden">
+        <div className="w-1/5 h-full overflow-y-auto">
           <DocsSidebarNav items={SIDEBAR_ITEMS} />
         </div>
-        {children}
+        <div className="w-4/5 h-full overflow-y-auto rounded-lg border-l-2 border-t-2 shadow-[inset_2px_2px_8px_rgba(0,0,0,0.2)] border-gray-800 p-4">
+          {children}
+        </div>
       </div>
-      {/* </div> */}
     </div>
   );
 }

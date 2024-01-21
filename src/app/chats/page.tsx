@@ -2,17 +2,23 @@
 import { db } from "@/db";
 import { questions } from "@/db/schema";
 import { revalidatePath } from "next/cache";
+import { Urbanist } from "next/font/google";
+import Image from "next/image";
+
+import ForwardIcon from "@/icons/icon-ios-arrow-right.svg";
+
+const urbanist = Urbanist({ subsets: ["latin"], display: "swap" });
 
 // This is a react server component, it has access to DB
 export default async function Home() {
   const allQuestions = await db.query.questions.findMany();
   return (
-    <main className="w-full h-screen bg-slate-200 flex flex-col items-center overscroll-contain">
-      <div className="justify-center space-y-4 overscroll-contain container">
+    <main className="h-full flex flex-col justify-end">
+      <div>
         {allQuestions.map((question) => (
           <div
             key={question.id}
-            className="w-full max-w-md p-4 bg-white rounded shadow-md"
+            className={`${urbanist.className} p-2 m-2 border w-max border-gray-400 rounded-xl shadow-l`}
           >
             {question.prompt}
           </div>
@@ -28,18 +34,24 @@ export default async function Home() {
           });
           revalidatePath("/");
         }}
-        className="w-full max-w-md p-4 bg-white rounded shadow-md"
+        className="flex flex-row items-center my-4 border-2 rounded-full border-gray-800 p-4 mx-2 shadow-xl"
       >
-        <div className="flex flex-col space-y-2">
-          <input
-            className="text-black border border-gray-300 rounded p-2 w-full"
-            id="title"
-            name="title"
+        <textarea
+          className="p-1 w-full focus:outline-none overflow-auto"
+          id="title"
+          name="title"
+          placeholder="Start typing..."
+        />
+        <button
+          title="send"
+          className="bg-orange-400 text-white aspect-square rounded-full mx-2 hover:bg-orange-500 w-12 h-12 grid"
+        >
+          <Image
+            alt="send icon"
+            src={ForwardIcon}
+            className="place-self-center"
           />
-          <button className="bg-blue-500 text-white rounded p-2 hover:bg-blue-600">
-            Submit
-          </button>
-        </div>
+        </button>
       </form>
     </main>
   );
