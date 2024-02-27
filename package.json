@@ -19,6 +19,7 @@
     "drizzle-kit": "^0.20.13",
     "drizzle-orm": "^0.29.3",
     "next": "^14.0.4",
+    "next-auth": "^4.24.6",
     "pg": "^8.11.3",
     "postgres": "^3.4.3",
     "react": "^18",

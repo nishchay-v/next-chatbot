@@ -37,7 +37,7 @@ export default function ChatLayout({
         <div className="w-1/5 h-full overflow-y-auto mt-4">
           <DocsSidebarNav items={SIDEBAR_ITEMS} />
         </div>
-        <div className="w-4/5 overflow-y-auto rounded-lg border-2 m-4 shadow-[inset_2px_2px_8px_rgba(0,0,0,0.2)] border-gray-800 p-4">
+        <div className="w-4/5 rounded-lg border-2 m-4 shadow-[inset_2px_2px_8px_rgba(0,0,0,0.2)] border-gray-800">
           {children}
         </div>
       </div>
